@@ -20,12 +20,12 @@ def Decision_Surface(data, col1, col2, target, model, probabilities=False, grids
     xx, yy = np.meshgrid(np.arange(x_min, x_max, x_gridsize), np.arange(y_min, y_max, y_gridsize))
     meshed_data = pd.DataFrame(np.c_[xx.ravel(), yy.ravel()])
     # Select solumns
-    tdf = data[[col1, col2]]
+    tdf = data[[col1, col2]].values
     plt.ylabel(col2)
     plt.xlabel(col1)
     # Fit model
     if None != model:
-        model.fit(tdf.values, target.values)
+        model.fit(tdf, target)
         if probabilities:
             # Color-scale on the contour (surface = separator)
             Z = model.predict_proba(meshed_data)[:, 1].reshape(xx.shape)
