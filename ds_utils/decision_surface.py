@@ -25,7 +25,7 @@ def Decision_Surface(data, col1, col2, target, model, probabilities=False, grids
     plt.xlabel(col1)
     # Fit model
     if None != model:
-        model.fit(tdf, target)
+        model.fit(tdf.values, target)
         if probabilities:
             # Color-scale on the contour (surface = separator)
             Z = model.predict_proba(meshed_data)[:, 1].reshape(xx.shape)
